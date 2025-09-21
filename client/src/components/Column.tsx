@@ -12,7 +12,7 @@ export function Column(props: { title: string, items: string[], setter: (items: 
             setContent("");
             }}>Add</button>
         
-            {props.items.map((item, index) => <Task key={index} index={index} content={item} setter={props.setter}/>)}
+            {props.items.map((item, index) => <Task key={index} index={index} content={item} setter={props.setter} items={props.items}/>)}
         
     </div>
 }
