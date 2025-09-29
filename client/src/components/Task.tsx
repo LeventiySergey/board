@@ -22,7 +22,7 @@ export function Task(props: {
 
     setStyle({
       opacity: 0.5,
-      position: "absolute",
+      position: "fixed", // Changed from "absolute" to "fixed"
       zIndex: 1000,
       pointerEvents: "none", 
       left: event.pageX - element.offsetWidth / 2,

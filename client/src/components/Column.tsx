@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Task } from "./Task";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 export function Column(props: {
   title: string;
@@ -9,7 +10,8 @@ export function Column(props: {
   hoverRef: React.RefObject<string | null>; 
 }) {
   const [content, setContent] = useState("");
-  
+  const [listref] = useAutoAnimate<HTMLDivElement>();
+
   function mouseEnter(e: React.MouseEvent<HTMLDivElement>) {
     props.hoverRef.current = props.title;
     e.currentTarget.style.border = "2px solid blue";
@@ -43,18 +45,21 @@ export function Column(props: {
       >
         Add
       </button>
-
-      {props.items.map((item, index) => (
-        <Task
-          key={`${item}-${index}`}
-          index={index}
-          content={item}
-          setter={props.setter}
-          items={props.items}
-          highlightedColumn={props.hoverRef} 
-          uni={props.uni}
-        />
-      ))}
+      <div ref={listref}>
+        {
+        props.items.map((item, index) => {
+          console.log("Rendering item:", item, "at index:", index);
+          return <Task
+            key={`${props.title}-${item}`} 
+            index={index}
+            content={item}
+            setter={props.setter}
+            items={props.items}
+            highlightedColumn={props.hoverRef} 
+            uni={props.uni}
+          />
+})}
+      </div>
     </div>
   );
 }
